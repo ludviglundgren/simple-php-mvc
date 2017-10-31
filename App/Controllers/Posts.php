@@ -2,18 +2,32 @@
 
 namespace App\Controllers;
 
-class Posts extends \Core\controller
+use \Core\View;
+use \App\Models\Post;
+
+class Posts extends \Core\Controller
 {
     public function indexAction()
     {
-        echo 'Hello from the index action in the Posts controller!';
-        echo '<p>Quert string parameters. <pre>' .
-            htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
+        $posts = Post::getAll();
+        // echo 'Hello from the index action in the Posts controller!';
+        View::renderTemplate('Posts/index.html', [
+            'posts' => $posts
+        ]);
     }
 
-    public function addNewAction()
+    public function newAction()
     {
-        echo 'Hello from the addNew action in the Posts controller!';
+        View::renderTemplate('Posts/new.html');
+    }
+
+    public function createAction()
+    {
+        $post = new Post($_POST);
+
+        $post->save();
+
+        View::renderTemplate('Posts/success.html');
     }
 
     public function editAction()

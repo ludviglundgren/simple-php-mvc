@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Add post{% endblock %}
+
+{% block body %}
+    
+    <h1>Add new post</h1>
+
+
+    <form method="post" action="/posts/create" >
+        <div>
+            <label for="inputTitle">Title</label>
+            <input id="inputTitle" name="title" />
+        </div>
+        <div>
+            <label for="inputContent">Content</label>
+            <input id="inputContent" name="content" />
+        </div>
+        <button type="submit">Add post</button>
+    </form>
+
+{% endblock %}
